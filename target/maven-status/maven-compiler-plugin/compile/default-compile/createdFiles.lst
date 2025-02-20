@@ -1,0 +1,5 @@
+com/ageng/setyo/chess/App.class
+com/ageng/setyo/chess/Board.class
+com/ageng/setyo/chess/Piece.class
+com/ageng/setyo/chess/Pawn.class
+com/ageng/setyo/chess/Cell.class
