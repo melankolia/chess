@@ -26,17 +26,17 @@ public class Pawn extends Piece {
 
         if (targetCell.getPiece() == null) {
             // Regular Move
-            if (newX == oldX) {
-                if (this.pieceColor == PieceColor.WHITE && stepY > 0 && stepY <= validFirstMove) return true;
-                else if (this.pieceColor == PieceColor.BLACK && stepY < 0 && stepY <= (-1 * validFirstMove)) return true;
-            }
+            if (newX != oldX) return false;
+            if (this.pieceColor == PieceColor.WHITE && stepY > 0 && stepY <= validFirstMove) return true;
+            if (this.pieceColor == PieceColor.BLACK && stepY < 0 && stepY <= (-1 * validFirstMove)) return true;
+
+            return false;
         }
 
         // Diagonal or Attack Move
-        if (newX != oldX) {
-            if (this.pieceColor == PieceColor.WHITE && stepY > 0) return true;
-            else if (this.pieceColor == PieceColor.BLACK && stepY < 0 && stepY <= (-1 * validFirstMove)) return true;
-        }
+        if (newX == oldX) return false;
+        if (this.pieceColor == PieceColor.WHITE && stepY == 1) return true;
+        if (this.pieceColor == PieceColor.BLACK && stepY == -1) return true;
 
         return false;
     }

@@ -7,7 +7,6 @@ import java.util.Scanner;
 public class Board {
     Cell[][] cells = new Cell[8][8];
     boolean isGameOver = false;
-    boolean firstMove = true;
 
     public Board() {
         for (int i = 0; i < 8; i++) {
@@ -44,9 +43,19 @@ public class Board {
 
         int turn = 0;
         while (!isGameOver) {
-            turn++;
 
+            /*
+             * First Move is White turn
+             * Second Move is Black Turn
+             */
+
+            turn++;
             printBoard();
+            boolean isBlackMove = turn % 2 == 0;
+
+            if (isBlackMove)System.out.println("Black move");
+            else System.out.println("White move");
+
 
             String position = scanner.nextLine();
             String[] positions = position.split(" ");
@@ -69,8 +78,14 @@ public class Board {
             // Get the Piece on Cell
             Piece piece = cells[oldY][oldX].getPiece();
 
+            // Validate Picking Piece
             if (piece == null) {
-                System.out.println("Cell is doesn't have a Piece");
+                System.out.println("The Cell doesn't have a Piece");
+                continue;
+            }
+
+            if (isBlackMove != piece.getPieceColor().equals(PieceColor.BLACK)) {
+                System.out.println("You pick wrong Piece Color");
                 continue;
             }
 
@@ -80,14 +95,22 @@ public class Board {
 
             // validate piece
             boolean firstMove = turn <= 2;
+
             boolean validMove = piece.validateMove(newX, newY, oldX, oldY, cells, firstMove);
             if (!validMove) {
-                System.out.println("Move is Invalid");
+                System.out.println("Invalid Move");
                 continue;
             }
 
+            Cell targetCell = cells[newY][newX];
+            // Check if win
+            if (targetCell.getPiece().getSymbol().equals("K")) {
+                System.out.println("The Winner is " + (isBlackMove ? "Black" : "White"));
+                isGameOver = true;
+            }
+
             // Set the Piece on new Cell
-            cells[newY][newX].setPiece(piece);
+            targetCell.setPiece(piece);
 
             // Set the old position to null
             cells[oldY][oldX] = new Cell();

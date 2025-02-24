@@ -19,4 +19,12 @@ public class Piece {
     public String toString() {
         return pieceColor == PieceColor.WHITE ? ("W" + symbol) : ("B" + symbol);
     }
+
+    public PieceColor getPieceColor() {
+        return pieceColor;
+    }
+
+    public String getSymbol() {
+        return symbol;
+    }
 }
