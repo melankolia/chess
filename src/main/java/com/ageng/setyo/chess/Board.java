@@ -60,7 +60,7 @@ public class Board {
             String position = scanner.nextLine();
             String[] positions = position.split(" ");
             if (positions.length != 2) {
-                System.out.println("Invalid position");
+                System.out.println("Invalid Position");
                 continue;
             }
 
@@ -68,7 +68,7 @@ public class Board {
             String newPosition = positions[1];
 
             if (oldPosition.length() != 2 || newPosition.length() != 2) {
-                System.out.println("Move is Invalid");
+                System.out.println("Invalid Move");
                 continue;
             }
 
@@ -80,12 +80,12 @@ public class Board {
 
             // Validate Picking Piece
             if (piece == null) {
-                System.out.println("The Cell doesn't have a Piece");
+                System.out.println("The cell is empty");
                 continue;
             }
 
             if (isBlackMove != piece.getPieceColor().equals(PieceColor.BLACK)) {
-                System.out.println("You pick wrong Piece Color");
+                System.out.println("You chose the wrong piece color");
                 continue;
             }
 
