@@ -1,5 +1,7 @@
 package com.ageng.setyo.chess;
 
+import com.ageng.setyo.chess.pieces.Piece;
+
 public class Cell {
     Piece piece;
 
@@ -20,6 +22,6 @@ public class Cell {
     @Override
     public String toString() {
         if (this.piece != null) return this.piece.toString();
-        return "-";
+        return "--";
     }
 }

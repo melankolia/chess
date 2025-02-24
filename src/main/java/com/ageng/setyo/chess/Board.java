@@ -1,71 +1,102 @@
 package com.ageng.setyo.chess;
 
-import java.util.Arrays;
+import com.ageng.setyo.chess.pieces.*;
+
 import java.util.Scanner;
 
 public class Board {
     Cell[][] cells = new Cell[8][8];
     boolean isGameOver = false;
+    boolean firstMove = true;
 
     public Board() {
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
                 cells[i][j] = new Cell();
-                if (i == 1 || i == 6) cells[i][j] = new Cell(new Pawn(i, 0, i == 1));
+                if (i == 1 || i == 6) cells[i][j] = new Cell(new Pawn((i == 1 ? PieceColor.WHITE : PieceColor.BLACK)));
             }
         }
+
+        // Initialize BLACK
+        cells[7][7] = new Cell(new Rook(PieceColor.BLACK));
+        cells[7][6] = new Cell(new Knight(PieceColor.BLACK));
+        cells[7][5] = new Cell(new Bishop(PieceColor.BLACK));
+        cells[7][4] = new Cell(new King(PieceColor.BLACK));
+        cells[7][3] = new Cell(new Queen(PieceColor.BLACK));
+        cells[7][2] = new Cell(new Bishop(PieceColor.BLACK));
+        cells[7][1] = new Cell(new Knight(PieceColor.BLACK));
+        cells[7][0] = new Cell(new Rook(PieceColor.BLACK));
+
+        // Initialize WHITE
+        cells[0][7] = new Cell(new Rook(PieceColor.WHITE));
+        cells[0][6] = new Cell(new Knight(PieceColor.WHITE));
+        cells[0][5] = new Cell(new Bishop(PieceColor.WHITE));
+        cells[0][4] = new Cell(new King(PieceColor.WHITE));
+        cells[0][3] = new Cell(new Queen(PieceColor.WHITE));
+        cells[0][2] = new Cell(new Bishop(PieceColor.WHITE));
+        cells[0][1] = new Cell(new Knight(PieceColor.WHITE));
+        cells[0][0] = new Cell(new Rook(PieceColor.WHITE));
+
     }
 
     public void play() {
         Scanner scanner = new Scanner(System.in);
+
+        int turn = 0;
         while (!isGameOver) {
+            turn++;
+
             printBoard();
 
-            System.out.print("Enter Coordinates From: ");
-            String oldPosition = scanner.nextLine();
+            String position = scanner.nextLine();
+            String[] positions = position.split(" ");
+            if (positions.length != 2) {
+                System.out.println("Invalid position");
+                continue;
+            }
 
-            if (oldPosition.length() != 2) {
+            String oldPosition = positions[0];
+            String newPosition = positions[1];
+
+            if (oldPosition.length() != 2 || newPosition.length() != 2) {
                 System.out.println("Move is Invalid");
                 continue;
             }
 
-            int oldX = Integer.parseInt(oldPosition.substring(1)) - 1;
-            int oldY = oldPosition.charAt(0) - 'A';
+            int oldX = oldPosition.charAt(0) - 'A';
+            int oldY = Integer.parseInt(oldPosition.substring(1)) - 1;
 
             // Get the Piece on Cell
-            Piece piece = cells[oldX][oldY].getPiece();
+            Piece piece = cells[oldY][oldX].getPiece();
 
             if (piece == null) {
                 System.out.println("Cell is doesn't have a Piece");
                 continue;
             }
 
-            int[] newPos = moveTo(scanner);
+            int[] newPos = moveTo(newPosition);
             int newX = newPos[0];
             int newY = newPos[1];
 
             // validate piece
-            boolean validMove = piece.validateMove(newX, newY, oldX, oldY);
+            boolean firstMove = turn <= 2;
+            boolean validMove = piece.validateMove(newX, newY, oldX, oldY, cells, firstMove);
             if (!validMove) {
                 System.out.println("Move is Invalid");
                 continue;
             }
 
             // Set the Piece on new Cell
-            cells[newX][newY].setPiece(piece);
-            // Set the position for the Piece on Cell
-            cells[newX][newY].getPiece().setPosition(newX, newY);
+            cells[newY][newX].setPiece(piece);
 
             // Set the old position to null
-            cells[oldX][oldY] = new Cell();
+            cells[oldY][oldX] = new Cell();
         }
     }
 
-    public int[] moveTo(Scanner scanner) {
-        System.out.print("Enter Coordinates To: ");
-        String newPosition = scanner.nextLine();
-        int newX = Integer.parseInt(newPosition.substring(1)) - 1;
-        int newY = newPosition.charAt(0) - 'A';
+    public int[] moveTo(String newPosition) {
+        int newX = newPosition.charAt(0) - 'A';
+        int newY = Integer.parseInt(newPosition.substring(1)) - 1;
 
         return new int[]{ newX, newY };
     }
@@ -80,7 +111,7 @@ public class Board {
                 if (i == -1) {
                     // 65 is ASCII code for A
                     if (j == 0) { System.out.print("X "); }
-                    System.out.print(String.valueOf(Character.toChars(j + 65)) + " ");
+                    System.out.print(" " + String.valueOf(Character.toChars(j + 65)) + " ");
                     continue;
                 }
 

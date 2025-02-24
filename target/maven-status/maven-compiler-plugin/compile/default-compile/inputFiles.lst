@@ -1,5 +1,11 @@
 /home/ageng/Documents/Learning/Java/my-chess/src/main/java/com/ageng/setyo/chess/App.java
 /home/ageng/Documents/Learning/Java/my-chess/src/main/java/com/ageng/setyo/chess/Board.java
 /home/ageng/Documents/Learning/Java/my-chess/src/main/java/com/ageng/setyo/chess/Cell.java
-/home/ageng/Documents/Learning/Java/my-chess/src/main/java/com/ageng/setyo/chess/Pawn.java
-/home/ageng/Documents/Learning/Java/my-chess/src/main/java/com/ageng/setyo/chess/Piece.java
+/home/ageng/Documents/Learning/Java/my-chess/src/main/java/com/ageng/setyo/chess/pieces/Bishop.java
+/home/ageng/Documents/Learning/Java/my-chess/src/main/java/com/ageng/setyo/chess/pieces/King.java
+/home/ageng/Documents/Learning/Java/my-chess/src/main/java/com/ageng/setyo/chess/pieces/Knight.java
+/home/ageng/Documents/Learning/Java/my-chess/src/main/java/com/ageng/setyo/chess/pieces/Pawn.java
+/home/ageng/Documents/Learning/Java/my-chess/src/main/java/com/ageng/setyo/chess/pieces/Piece.java
+/home/ageng/Documents/Learning/Java/my-chess/src/main/java/com/ageng/setyo/chess/pieces/PieceColor.java
+/home/ageng/Documents/Learning/Java/my-chess/src/main/java/com/ageng/setyo/chess/pieces/Queen.java
+/home/ageng/Documents/Learning/Java/my-chess/src/main/java/com/ageng/setyo/chess/pieces/Rook.java
