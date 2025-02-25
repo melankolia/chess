@@ -1,4 +1,9 @@
 /home/ageng/Documents/Learning/Java/my-chess/src/test/java/com/ageng/setyo/chess/AppTest.java
+/home/ageng/Documents/Learning/Java/my-chess/src/test/java/com/ageng/setyo/chess/BishopTest.java
 /home/ageng/Documents/Learning/Java/my-chess/src/test/java/com/ageng/setyo/chess/CellTest.java
+/home/ageng/Documents/Learning/Java/my-chess/src/test/java/com/ageng/setyo/chess/KingTest.java
+/home/ageng/Documents/Learning/Java/my-chess/src/test/java/com/ageng/setyo/chess/KnightTest.java
+/home/ageng/Documents/Learning/Java/my-chess/src/test/java/com/ageng/setyo/chess/PawnTest.java
 /home/ageng/Documents/Learning/Java/my-chess/src/test/java/com/ageng/setyo/chess/PieceTest.java
+/home/ageng/Documents/Learning/Java/my-chess/src/test/java/com/ageng/setyo/chess/QueenTest.java
 /home/ageng/Documents/Learning/Java/my-chess/src/test/java/com/ageng/setyo/chess/RookTest.java

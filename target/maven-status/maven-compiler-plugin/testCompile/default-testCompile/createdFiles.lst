@@ -1,4 +1,9 @@
-com/ageng/setyo/chess/CellTest.class
-com/ageng/setyo/chess/AppTest.class
+com/ageng/setyo/chess/BishopTest.class
+com/ageng/setyo/chess/KingTest.class
 com/ageng/setyo/chess/PieceTest.class
+com/ageng/setyo/chess/KnightTest.class
+com/ageng/setyo/chess/CellTest.class
+com/ageng/setyo/chess/PawnTest.class
+com/ageng/setyo/chess/QueenTest.class
+com/ageng/setyo/chess/AppTest.class
 com/ageng/setyo/chess/RookTest.class
