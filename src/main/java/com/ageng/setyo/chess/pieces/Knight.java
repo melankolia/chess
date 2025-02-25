@@ -20,6 +20,12 @@ public class Knight extends Piece {
     @Override
     public boolean validateMove(int newX, int newY, int oldX, int oldY, Cell[][] cells, boolean firstMove) {
         // For L Move
-        return Math.abs(newX - oldX) + Math.abs(newY - oldY) == 3;
+        int stepX = Math.abs(newX - oldX);
+        int stepY = Math.abs(newY - oldY);
+
+        if (stepX == 1 && stepY == 2) return true;
+        if (stepX == 2 && stepY == 1) return true;
+
+        return false;
     }
 }
