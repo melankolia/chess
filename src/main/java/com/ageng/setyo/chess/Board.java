@@ -103,10 +103,14 @@ public class Board {
             }
 
             Cell targetCell = cells[newY][newX];
+
             // Check if win
-            if (targetCell.getPiece().getSymbol().equals("K")) {
-                System.out.println("The Winner is " + (isBlackMove ? "Black" : "White"));
-                isGameOver = true;
+            Piece targetPiece = targetCell.getPiece();
+            if (targetPiece != null) {
+                if (targetPiece.getSymbol().equals("K")) {
+                    System.out.println("The Winner is " + (isBlackMove ? "Black" : "White"));
+                    isGameOver = true;
+                }
             }
 
             // Set the Piece on new Cell

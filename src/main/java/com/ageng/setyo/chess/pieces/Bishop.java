@@ -8,7 +8,7 @@ public class Bishop extends Piece{
     }
 
     /**
-     * Pawn Moves
+     * Bishop Moves
      * Y   -----------
      * +1    X   -   X
      *  0    -   B   -
