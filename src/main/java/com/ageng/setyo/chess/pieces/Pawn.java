@@ -24,11 +24,13 @@ public class Pawn extends Piece {
         int validFirstMove = firstMove ? 2 : 1;
         int stepY = (newY - oldY);
 
+        System.out.println("stepY = " + stepY);
+        System.out.println("Black First Move = " + (-1 * validFirstMove));
         if (targetCell.getPiece() == null) {
             // Regular Move
             if (newX != oldX) return false;
             if (this.pieceColor == PieceColor.WHITE && stepY > 0 && stepY <= validFirstMove) return true;
-            if (this.pieceColor == PieceColor.BLACK && stepY < 0 && stepY <= (-1 * validFirstMove)) return true;
+            if (this.pieceColor == PieceColor.BLACK && stepY < 0 && stepY >= (-1 * validFirstMove)) return true;
 
             return false;
         }
