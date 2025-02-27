@@ -60,6 +60,7 @@ public class Board {
             String position = scanner.nextLine();
             String[] positions = position.split(" ");
             if (positions.length != 2) {
+                turn--;
                 System.out.println("Invalid Position");
                 continue;
             }
@@ -69,6 +70,7 @@ public class Board {
 
             // Check if the Position is Valid
             if (oldPosition.length() != 2 || newPosition.length() != 2) {
+                turn--;
                 System.out.println("Invalid Move");
                 continue;
             }
@@ -81,12 +83,14 @@ public class Board {
 
             // Validate Picking Piece
             if (piece == null) {
-                System.out.println("The cell is empty");
+                turn--;
+                System.out.println("Invalid Move");
                 continue;
             }
 
             if (isBlackMove != piece.getPieceColor().equals(PieceColor.BLACK)) {
-                System.out.println("You chose the wrong piece color");
+                turn--;
+                System.out.println("Invalid Move");
                 continue;
             }
 
@@ -94,15 +98,19 @@ public class Board {
             int newX = newPos[0];
             int newY = newPos[1];
 
+            Cell oldCell = cells[oldY][oldX];
             Cell targetCell = cells[newY][newX];
+
+            Piece oldPiece = oldCell.getPiece();
             Piece targetPiece = targetCell.getPiece();
 
             // Check if the Piece is Knight or Not
-            if (targetPiece != null && !targetPiece.getSymbol().equals("N")) {
+            if (oldPiece != null && !oldPiece.getSymbol().equals("N")) {
                 // Check if the path is clear
                 boolean clear = isPathClear(cells,newX, newY, oldX, oldY);
                 if (!clear) {
-                    System.out.println("Path is not Clear");
+                    turn--;
+                    System.out.println("Invalid Move");
                     continue;
                 }
             }
@@ -112,15 +120,31 @@ public class Board {
 
             boolean validMove = piece.validateMove(newX, newY, oldX, oldY, cells, firstMove);
             if (!validMove) {
+                turn--;
                 System.out.println("Invalid Move");
                 continue;
             }
 
-            // Check if win
+
             if (targetPiece != null) {
+
+                // Check if win
                 if (targetPiece.getSymbol().equals("K")) {
                     System.out.println("The Winner is " + (isBlackMove ? "Black" : "White"));
                     isGameOver = true;
+                }
+
+                // Check if the attacked Piece is valid
+                if (isBlackMove && targetCell.getPiece().getPieceColor() == PieceColor.BLACK) {
+                    turn--;
+                    System.out.println("Invalid Move");
+                    continue;
+                }
+
+                if (!isBlackMove && targetCell.getPiece().getPieceColor() == PieceColor.WHITE) {
+                    turn--;
+                    System.out.println("Invalid Move");
+                    continue;
                 }
             }
 
@@ -140,10 +164,11 @@ public class Board {
     }
 
     public boolean isPathClear(Cell[][] cells, int newX, int newY, int oldX, int oldY) {
-        int dx = sign(newX - oldX);
-        int dy = sign(newY - oldY);
+        int dx = sign(newX - oldX); //  Direction
+        int dy = sign(newY - oldY); //  Direction
 
-        int x = oldX + dx, y = oldY + dy;
+        int x = oldX + dx;
+        int y = oldY + dy;
 
         while (x != newX || y != newY) {
             if (cells[y][x].getPiece() != null) return false; // Obstacle found (assuming 0 = empty)
