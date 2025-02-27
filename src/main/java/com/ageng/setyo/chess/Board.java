@@ -75,7 +75,7 @@ public class Board {
                 continue;
             }
 
-            int oldX = oldPosition.charAt(0) - 'A';
+            int oldX = oldPosition.charAt(0) - 'a';
             int oldY = Integer.parseInt(oldPosition.substring(1)) - 1;
 
             // Get the Piece on Cell
@@ -156,7 +156,7 @@ public class Board {
     }
 
     public int[] moveTo(String newPosition) {
-        int newX = newPosition.charAt(0) - 'A';
+        int newX = newPosition.charAt(0) - 'a';
         int newY = Integer.parseInt(newPosition.substring(1)) - 1;
 
         return new int[]{ newX, newY };
