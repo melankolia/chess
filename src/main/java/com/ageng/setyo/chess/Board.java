@@ -67,6 +67,7 @@ public class Board {
             String oldPosition = positions[0];
             String newPosition = positions[1];
 
+            // Check if the Position is Valid
             if (oldPosition.length() != 2 || newPosition.length() != 2) {
                 System.out.println("Invalid Move");
                 continue;
@@ -93,6 +94,19 @@ public class Board {
             int newX = newPos[0];
             int newY = newPos[1];
 
+            Cell targetCell = cells[newY][newX];
+            Piece targetPiece = targetCell.getPiece();
+
+            // Check if the Piece is Knight or Not
+            if (targetPiece != null && !targetPiece.getSymbol().equals("N")) {
+                // Check if the path is clear
+                boolean clear = isPathClear(cells,newX, newY, oldX, oldY);
+                if (!clear) {
+                    System.out.println("Path is not Clear");
+                    continue;
+                }
+            }
+
             // validate piece
             boolean firstMove = turn <= 2;
 
@@ -102,10 +116,7 @@ public class Board {
                 continue;
             }
 
-            Cell targetCell = cells[newY][newX];
-
             // Check if win
-            Piece targetPiece = targetCell.getPiece();
             if (targetPiece != null) {
                 if (targetPiece.getSymbol().equals("K")) {
                     System.out.println("The Winner is " + (isBlackMove ? "Black" : "White"));
@@ -127,6 +138,25 @@ public class Board {
 
         return new int[]{ newX, newY };
     }
+
+    public boolean isPathClear(Cell[][] cells, int newX, int newY, int oldX, int oldY) {
+        int dx = sign(newX - oldX);
+        int dy = sign(newY - oldY);
+
+        int x = oldX + dx, y = oldY + dy;
+
+        while (x != newX || y != newY) {
+            if (cells[y][x].getPiece() != null) return false; // Obstacle found (assuming 0 = empty)
+            x += dx;
+            y += dy;
+        }
+        return true;
+    }
+
+    public  int sign(int x) {
+        return Integer.compare(x, 0);
+    }
+
 
     public void printBoard() {
 

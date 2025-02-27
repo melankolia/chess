@@ -1,11 +1,11 @@
-com/ageng/setyo/chess/App.class
 com/ageng/setyo/chess/pieces/PieceColor.class
+com/ageng/setyo/chess/App.class
 com/ageng/setyo/chess/Board.class
 com/ageng/setyo/chess/pieces/Piece.class
 com/ageng/setyo/chess/pieces/Knight.class
 com/ageng/setyo/chess/pieces/Rook.class
 com/ageng/setyo/chess/pieces/Bishop.class
 com/ageng/setyo/chess/Cell.class
-com/ageng/setyo/chess/pieces/King.class
 com/ageng/setyo/chess/pieces/Queen.class
+com/ageng/setyo/chess/pieces/King.class
 com/ageng/setyo/chess/pieces/Pawn.class
