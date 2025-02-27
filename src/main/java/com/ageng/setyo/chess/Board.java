@@ -125,7 +125,6 @@ public class Board {
                 continue;
             }
 
-
             if (targetPiece != null) {
 
                 // Check if win
